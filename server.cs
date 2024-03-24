@@ -154,29 +154,12 @@ namespace WindowsFormsApp6
                     Start_Cmd.Enabled = false;
                     if (clientConnections.TryGetValue(ip, out ClientConnection connection))
                     {
-                        if (connection.Stream.CanRead)
-                        {
-                            if (connection.Reader.Peek() >= 0)
-                            {
-                                string response = connection.Reader.ReadLine();
-                                Console.WriteLine(response);
-                            }
-                            else
-                            {
-                                Console.WriteLine("No data available to read.");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Stream is not readable.");
-                        }
+                        connection.Writer.WriteLine("cmd-start");
+                        connection.Writer.Flush();
                     }
                 }
             }
-            catch (IOException ex)
-            {
-                Console.WriteLine("IO error: " + ex.Message);
-            }
+
             catch (Exception ex)
             {
                 MessageBox.Show("בחר לקוח מהרשימה.");
@@ -200,11 +183,6 @@ namespace WindowsFormsApp6
                     {
                         connection.Writer.WriteLine("cmd-stop");
                         connection.Writer.Flush();
-                        string response = connection.Reader.ReadLine(); // שמור את התגובה מהשרת במשתנה
-                        if (response != null)
-                        {
-                            Console.WriteLine(response); // הדפס את התגובה
-                        }
 
 
                     }
