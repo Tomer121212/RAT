@@ -51,6 +51,8 @@ namespace Client1
                         }
                         Console.WriteLine("cmd-start received");
                         writer.WriteLine("Success");
+                        writer.Flush();
+
                     }
                     else if (serverResponse == "cmd-stop")
                     {
@@ -62,6 +64,7 @@ namespace Client1
                         }
                         Console.WriteLine("cmd-stop received");
                         writer.WriteLine("Success");
+                        writer.Flush();
                     }
                 }
 
