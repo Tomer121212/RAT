@@ -156,6 +156,7 @@ namespace WindowsFormsApp6
                     {
                         connection.Writer.WriteLine("cmd-start");
                         connection.Writer.Flush();
+                        MessageBox.Show(connection.Reader.ReadToEnd());
                     }
                 }
             }
